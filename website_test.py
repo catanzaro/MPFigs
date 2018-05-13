@@ -1,35 +1,30 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 12 16:26:37 2018
+Created on Sat May 12 19:07:35 2018
 
 @author: mike
 """
 import plotly
+import plotly.plotly as py
 import plotly.graph_objs as go
+
 import numpy as np
-#import plotly.figure_factory as FF
 
+s = np.linspace(0, 2 * np.pi, 240)
+t = np.linspace(0, np.pi, 240)
+sGrid, tGrid = np.meshgrid(s, t)
 
-### The following works great for the cylinder
-#t = np.linspace(0,2*np.pi,50)
-#z = np.linspace(0,2,50)
-#
-#tg,zg = np.meshgrid(t,z)
-#
-#x = 2*np.cos(tg)
-#y = 2*np.sin(tg)
-#z=zg
+x = np.cos(sGrid)
+y = np.sin(sGrid)
+z = tGrid
+#r = 2 + np.sin(7 * sGrid + 5 * tGrid)  # r = 2 + sin(7s+5t)
+#x = r * np.cos(sGrid) * np.sin(tGrid)  # x = r*cos(s)*sin(t)
+#y = r * np.sin(sGrid) * np.sin(tGrid)  # y = r*sin(s)*sin(t)
+#z = r * np.cos(tGrid)                  # z = r*cos(t)
 
-x = np.linspace(-1,1,50)
-y = np.linspace(-2,2,50)
-
-xg,yg = np.meshgrid(x,y)
-
-z = yg**3 - xg*yg
-
-
-surf = go.Surface(x=xg,y=yg,z=z)
+surface = go.Surface(x=x, y=y, z=z)
+data = [surface]
 
 layout = go.Layout(
     title='Parametric Plot',
@@ -55,6 +50,5 @@ layout = go.Layout(
     )
 )
 
-fig = go.Figure(data=[surf], layout=layout)
-#py.iplot(fig, filename='Parametric_plot')
+fig = go.Figure(data=data, layout=layout)
 plotly.offline.plot(fig)
