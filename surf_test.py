@@ -12,24 +12,24 @@ import numpy as np
 
 
 ### The following works great for the cylinder
-#t = np.linspace(0,2*np.pi,50)
-#z = np.linspace(0,2,50)
+t = np.linspace(0,2*np.pi,50)
+x = np.linspace(0,2,50)
+
+tg,xg = np.meshgrid(t,x)
+
+y = 2*np.cos(tg)
+z = 2*np.sin(tg)
+
+
+#x = np.linspace(-1,1,50)
+#y = np.linspace(-2,2,50)
 #
-#tg,zg = np.meshgrid(t,z)
+#xg,yg = np.meshgrid(x,y)
 #
-#x = 2*np.cos(tg)
-#y = 2*np.sin(tg)
-#z=zg
-
-x = np.linspace(-1,1,50)
-y = np.linspace(-2,2,50)
-
-xg,yg = np.meshgrid(x,y)
-
-z = yg**3 - xg*yg
+#z = yg**3 - xg*yg
 
 
-surf = go.Surface(x=xg,y=yg,z=z)
+surf = go.Surface(x=xg,y=y,z=z)
 
 layout = go.Layout(
     title='Parametric Plot',
