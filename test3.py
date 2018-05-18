@@ -1,31 +1,28 @@
-#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 12 16:26:37 2018
+Created on Tue May 15 17:12:27 2018
 
-@author: mike
+@author: mikec
 """
 import plotly
 import plotly.graph_objs as go
 import numpy as np
-#import dash 
-#import dash_core_components as dcc
-#import dash_html_components as html
+import dash 
+import dash_core_components as dcc
+import dash_html_components as html
 #import plotly.figure_factory as FF
 
 xdiv=100
-tdiv=50
+tdiv=60
 ### Make the rectangular grid, the surface of the dented cylinder
-theta = np.linspace(0,2*np.pi,tdiv) 
-x = np.linspace(0,10,xdiv) 
+theta = np.linspace(3*np.pi/2.,2*np.pi,tdiv) 
+x = np.linspace(0,8,xdiv) 
 #zthresh = np.cos(theta[25])
-zthresh = 2.5
-zval = [-2,-1]
-xval = [4,6]
 
 tg,xg = np.meshgrid(theta,x) # grided versions
 
 z = np.full((xdiv,tdiv),np.nan)
+#z = np.zeros((xdiv,tdiv))
 y = 2*np.cos(tg)
 
 
@@ -55,62 +52,107 @@ for dx in range(xdiv): # iterating x-coordinates
             if ((4./7)*(2*np.cos(theta[s])-1)**3 + (3./7)*(2*np.cos(theta[s])-1)-1)*((9-x[dx])/2)+ (-1)*(np.sqrt(4-(2*np.cos(theta[s]))**2))*(1-(9-x[dx])/2) <= zthresh:
                 z[dx,s] = ((4./7)*(2*np.cos(theta[s])-1)**3 + (3./7)*(2*np.cos(theta[s])-1)-1)*((9-x[dx])/2)+ (-1)*(np.sqrt(4-(2*np.cos(theta[s]))**2))*(1-(9-x[dx])/2)
 
-#zmax = np.nanmax(z)
-#for dx in range(xdiv-1):
-#    for s in range(tdiv-1):
-#        if not np.isnan(z[dx,s]):
-#            if np.isnan(z[dx+1,s]) or np.isnan(z[dx-1,s]) or np.isnan(z[dx,s+1]) or np.isnan(z[dx,s-1]):
-#                z[dx,s] = zmax
-#                print('change!')
-
-
-
 
 contours = dict(
         x=dict(
-                show=False,
-                highlight=False,
-                usecolormap=False,
+                show=True,
+                highlight=True,
                 project=dict(
                         x=False,
                         y=False,
                         z=False)),
         y=dict(
-                show=False,
-                highlight=False,
-                usecolormap=True,
+                show=True,
+                highlight=True,
                 project=dict(
                         x=False,
                         y=False,
                         z=False)),
         z=dict(
-                show=False,
+                show=True,
                 highlight=True,
-                usecolormap=True,
                 project=dict(
                         x=False,
                         y=False,
                         z=False)),
         )
-s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,surfacecolor='cmocean',contours=contours,showscale=False)
+s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,surfacecolor='cmocean',hoverinfo='none')
 
 
+
+#s1 = go.Surface(x=xg,y=y,z=z)
+#s7 = go.Surface(x=np.meshgrid(theta,np.linspace(9,10,50))[1],y=y,z=z)
+#
+#### Transition from circle to start of dent
+#
+#x = np.linspace(1,3,50)
+#xg = np.meshgrid(theta,x)[1]
+#y = 2*np.cos(tg)
+#z = np.zeros((50,50))
+#for s in range(50): # Iterate over theta coordinates
+#    for dx in range(50): # Iterate over x coordinates
+#        if theta[s] < 3*np.pi/2.:
+#            z[dx,s] = 2*np.sin(theta[s])
+#        else:
+#            z[dx,s] = ((4./7)*(2*np.cos(theta[s])-1)**3 + (3./7)*(2*np.cos(theta[s])-1)-1)*((x[dx]-1)/2)+ (-1)*(np.sqrt(4-(2*np.cos(theta[s]))**2))*(1-(x[dx]-1)/2)
+#    #print(z)
+#s3 = go.Surface(x=xg,y=y,z=z)
+#
+## Wrinkle
+#
+#x = np.linspace(3,5,50)
+#xg = np.meshgrid(theta,x)[1]
+#y = 2*np.cos(tg)
+#z = np.zeros((50,50))
+#for s in range(50): # Iterate over theta coordinates
+#    for dx in range(50): # Iterate over x coordinates
+#        if theta[s] < 3*np.pi/2.:
+#            z[dx,s] = 2*np.sin(theta[s])
+#        else:
+#            z[dx,s] = ((1/14.)+(6/14.)*((x[dx]-3)/2))*(4*np.cos(theta[s])-2)**3 + (3/14. -(24/14.)*((x[dx]-3)/2))*(4*np.cos(theta[s])-2)-1
+#    #print(z)
+#
+#s4 = go.Surface(x=xg,y=y,z=z)
+#
+## Wrinkle
+#x = np.linspace(5,7,50)
+#xg = np.meshgrid(theta,x)[1]
+#y = 2*np.cos(tg)
+#z = np.zeros((50,50))
+#for s in range(50): # Iterate over theta coordinates
+#    for dx in range(50): # Iterate over x coordinates
+#        if theta[s] < 3*np.pi/2.:
+#            z[dx,s] = 2*np.sin(theta[s])
+#        else:
+#            z[dx,s] = ((1/14.)+(6/14.)*((7-x[dx])/2))*(4*np.cos(theta[s])-2)**3 + (3/14. -(24/14.)*((7-x[dx])/2))*(4*np.cos(theta[s])-2)-1
+#    #print(z)
+#
+#s5 = go.Surface(x=xg,y=y,z=z)
+#
+#x = np.linspace(7,9,50)
+#xg = np.meshgrid(theta,x)[1]
+#y = 2*np.cos(tg)
+#z = np.zeros((50,50))
+#for s in range(50): # Iterate over theta coordinates
+#    for dx in range(50): # Iterate over x coordinates
+#        if theta[s] < 3*np.pi/2.:
+#            z[dx,s] = 2*np.sin(theta[s])
+#        else:
+#            z[dx,s] = ((4./7)*(2*np.cos(theta[s])-1)**3 + (3./7)*(2*np.cos(theta[s])-1)-1)*((9-x[dx])/2)+ (-1)*(np.sqrt(4-(2*np.cos(theta[s]))**2))*(1-(9-x[dx])/2)
+#    #print(z)
+#s6 = go.Surface(x=xg,y=y,z=z)
 #
 #
 #### Set the layout params
 #
 layout = go.Layout(
-    title='Dented Cylinder with Threshold',
+    title='Dented Cylinder with Threshold '+str(zthresh),
     xaxis=dict(
-            range=[-5,6]),
-    scene=dict(
-        #aspectratio=dict(
-        #    x=1.84296,y=0.73642,z=0.73680),
-        zaxis = dict(
-            range=zval),
-        xaxis = dict(
-                range=[1,2])
-            ),
+            rangeselector=dict(),
+            rangeslider=dict(
+                    autorange=True,
+                    ),
+            type="linear")
 #    scene=dict(
 #        xaxis=dict(
 #            gridcolor='rgb(255, 255, 255)',
@@ -135,4 +177,4 @@ layout = go.Layout(
 
 fig = go.Figure(data=[s1], layout=layout)
 #py.iplot(fig, filename='Parametric_plot')
-plotly.offline.plot(fig,filename='Dented_cylinder_threshold_'+str(zmax)+'.html')
+plotly.offline.plot(fig,filename='Dented_cylinder_slider.html')
