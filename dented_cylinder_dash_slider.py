@@ -101,20 +101,20 @@ app.layout = html.Div([
                                                               showspikes=False))}
                         }
                                                     )],
-                              style={'height':'100%','width':'89%','display':'inline-block','padding':'50px 50px 50px 50px'}), 
+                              style={'height':'100%','width':'89%','display':'inline-block','padding':'0px 0px 0px -100px'}), 
         html.Div([dcc.RangeSlider(
                         id='z-slider',
                         min=-2,
                         max=2,
                         step=0.01,
-                        marks=[i for i in range(-2,3)],
+                        #marks=[i for i in range(-2,3)],
                         value=[-2 ,2],
                         vertical=True,
                         updatemode='drag',
                         allowCross=False,
                         )],
-                style={'width':'10mm', 'height':'60mm','display':'inline-block','padding':'20px 20px 0px 0px'})
-        ],style={'width':'90%','height':'100mm','padding':'0px 5px'}),
+                style={'width':'10mm', 'height':'60mm','display':'inline-block','padding':'0px 0px 0px 0px'})
+        ],style={'width':'90%','height':'100mm','padding':'0px 0px'}),
         html.Div([
                 dcc.RangeSlider(
                         id='x-slider',
@@ -129,11 +129,6 @@ app.layout = html.Div([
                 ],style={'width':'60%'})
         ],style={'width':'100%','height':'100%'})
                 
-                # style would go here.
-#        html.Div([ ## div element for Cerf diagram
-#                ])
-#style={'width' : ' 100%', 'display' : 'inline-block'})
-
 #@app.callback(
 #        dash.dependencies.Output('surface-cyl','figure'),
 #        [dash.dependencies.Input('z-slider','value'),
