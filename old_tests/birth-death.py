@@ -51,7 +51,7 @@ contours = dict(
                         z=False)),
         )
 
-s1 = go.Surface(x=xg,y=yg,z=z,opacity=0.7,surfacecolor='cmocean',contours=contours,showscale=False,hoverinfo='none')
+s1 = go.Surface(x=xg,y=yg,z=z,opacity=0.7,colorscale='jet',contours=contours,showscale=False,hoverinfo='none')
 
 
 #

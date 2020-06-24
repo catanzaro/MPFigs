@@ -8,10 +8,6 @@ Created on Sat May 12 16:26:37 2018
 import plotly
 import plotly.graph_objs as go
 import numpy as np
-import cmocean
-import dash_core_components as dcc
-import dash_html_components as html
-#import plotly.figure_factory as FF
 
 xdiv=100
 tdiv=50
@@ -77,7 +73,7 @@ contours = dict(
                         y=False,
                         z=False)),
         )
-s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,surfacecolor='cmocean',hoverinfo='none',contours=contours,showscale=False)
+s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,colorscale='deep',hoverinfo='none',contours=contours,showscale=False)
 
 
 
@@ -169,7 +165,7 @@ layout = go.Layout(
     sliders=[dict(
             visible=True,
             steps=[dict(
-                    method='relayout'))]
+                    method='relayout')])]
 )
 
 fig = go.Figure(data=[s1], layout=layout)

@@ -6,13 +6,12 @@ Created on Sat May 12 16:04:02 2018
 @author: mike
 """
 
-import plotly.plotly as py
 import ipywidgets as widgets
 import numpy as np
 
-from ipywidgets import interact, interactive, fixed
-from IPython.core.display import HTML
-from IPython.display import display, clear_output
+#from ipywidgets import interact, interactive, fixed
+#from IPython.core.display import HTML
+#from IPython.display import display, clear_output
 from plotly.widgets import GraphWidget
 
 g = GraphWidget('https://plot.ly/~DemoAccount/10147/')

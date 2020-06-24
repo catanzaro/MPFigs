@@ -1,43 +1,33 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
-Created on Sat May 12 16:26:37 2018
 
-@author: mike
+This code creates an html file, plotting the x = const slices of the wrinkled cylinder.
 """
 import plotly
-import plotly.plotly as py
 import plotly.graph_objs as go
 import numpy as np
-#import dash 
-#import dash_core_components as dcc
-#import dash_html_components as html
-#import plotly.figure_factory as FF
 
-xdiv=100
+## Grid parameters
+xdiv=100 
 tdiv=50
-### Make the rectangular grid, the surface of the dented cylinder
+## Make the rectangular grid, the surface of the dented cylinder
 theta = np.linspace(0,2*np.pi,tdiv) 
 x = np.linspace(0,10,xdiv) 
-#zthresh = np.cos(theta[25])
-zval = [-2,2]
-yval=[-2,2]
-xval = [0,10]
 
-tg,xg = np.meshgrid(theta,x) # grided versions
+## Plotting parameters. These vary the 'level' and 'sublevel' spaces shown.
+zval = [-2,2] # max [-2,2]
+yval=[-2,2] # max [-2,2]
+xval = [0,10] # max [0,10]
+
+tg,xg = np.meshgrid(theta,x) # grid versions
 
 z = np.full((xdiv,tdiv),np.nan)
 y = 2*np.cos(tg)
 
-
-
-
-
-
-
 for dx in range(xdiv): # iterating x-coordinates
     for s in range(tdiv): # iterating theta-coordinates
-        if theta[s] < 3*np.pi/2.: # 3/4 of the cylinder is perfect
+        if theta[s] < 3*np.pi/2.: # 3/4 of the cylinder is an actual cylinder
                z[dx,s] = 2*np.sin(theta[s])
         elif x[dx] <= 1 or x[dx] >= 9: #make the caps of the cylinder
                  z[dx,s] = 2*np.sin(theta[s])
@@ -50,54 +40,46 @@ for dx in range(xdiv): # iterating x-coordinates
         elif 7<x[dx]<=9: # end the dent
                 z[dx,s] = ((4./7)*(2*np.cos(theta[s])-1)**3 + (3./7)*(2*np.cos(theta[s])-1)-1)*((9-x[dx])/2)+ (-1)*(np.sqrt(4-(2*np.cos(theta[s]))**2))*(1-(9-x[dx])/2)
 
-#zmax = np.nanmax(z)
-#for dx in range(xdiv-1):
-#    for s in range(tdiv-1):
-#        if not np.isnan(z[dx,s]):
-#            if np.isnan(z[dx+1,s]) or np.isnan(z[dx-1,s]) or np.isnan(z[dx,s+1]) or np.isnan(z[dx,s-1]):
-#                z[dx,s] = zmax
-#                print('change!')
+
+## Contour parameters: What to show on hover, etc.
+#contours = dict(
+#        x=dict(
+#                show=False,
+#                highlight=True,
+#                highlightcolor='black',
+#                highlightwidth=10,
+#                usecolormap=False,
+#                project=dict(
+#                        x=False,
+#                        y=False,
+#                        z=False)),
+#        y=dict(
+#                show=False,
+#                highlight=False,
+#                usecolormap=True,
+#                project=dict(
+#                        x=False,
+#                        y=False,
+#                        z=False)),
+#        z=dict(
+#                show=False,
+#                highlight=False,
+#                usecolormap=True,
+#                project=dict(
+#                        x=False,
+#                        y=False,
+#                        z=False)),
+#        )
+#s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,surfacecolor='cmocean',contours=contours,showscale=False,hoverinfo='none')
+traces=[]
+for i in range(10): #iterate over x-values
+    traces.append(go.Scatter3d(x=np.full((1,100),x[i*9]),y=y[i*9],z=z[i*9],line=dict(width=1)))
 
 
+### Set the layout params
 
-
-contours = dict(
-        x=dict(
-                show=False,
-                highlight=True,
-                highlightcolor='black',
-                highlightwidth=10,
-                usecolormap=False,
-                project=dict(
-                        x=False,
-                        y=False,
-                        z=False)),
-        y=dict(
-                show=False,
-                highlight=False,
-                usecolormap=True,
-                project=dict(
-                        x=False,
-                        y=False,
-                        z=False)),
-        z=dict(
-                show=False,
-                highlight=False,
-                usecolormap=True,
-                project=dict(
-                        x=False,
-                        y=False,
-                        z=False)),
-        )
-s1 = go.Surface(x=xg,y=y,z=z,opacity=0.7,surfacecolor='cmocean',contours=contours,showscale=False,hoverinfo='none')
-
-
-#
-#
-#### Set the layout params
-#
 layout = go.Layout(
-    title='Wrinkled cylinder',
+    title='Slices of wrinkled cylinder',
     scene=dict(
         aspectratio=dict(
             x=2,y=1,z=1),
@@ -148,6 +130,5 @@ layout = go.Layout(
 #    )
 )
 
-fig = go.Figure(data=[s1], layout=layout)
-#py.plot(fig, filename='Wrinkled_cylinder')
-plotly.offline.plot(fig,filename='Wrinkled_cylinder.html')
+fig = go.Figure(data=traces,layout=layout)
+plotly.offline.plot(fig,filename='Wrinkled_cylinder_slices.html')
