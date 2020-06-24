@@ -5,10 +5,12 @@ multiparameter persistent homology.
 
 ## Motivation
 
-The idea behind multiparameter persistence is to study how shapes or datasets (or whatever you'd like to study) change as multiple parameters vary. Traditionally, ordinary persistence focus on sub-level thresholding, meaning taking various truncations of an object, and seeing what properties change or persistence as a function of the truncation parameter. 
-In multiparameter persistence, the idea is the same, but now we look at multiple ways of truncating a shape simultaneously. 
+The idea behind multiparameter persistence is to study how shapes or datasets (or whatever you'd like to study) change as multiple parameters vary. Traditionally, ordinary persistence focuses on sub-level thresholding, meaning truncating an object several times over, and seeing what properties change or persist as a function of the truncation parameter. 
+In multiparameter persistence, the idea is the same, but now we look at multiple ways or directions of truncating a shape simultaneously. 
 
-What we focus on here is truncating objects which have been deformed. One example is the wrinkled cylinder introduced below. One way to think about the wrinkled cylinder is to take an ordinary cylinder and push in on the side of it. A more theoretical perspective is to view it as a one-parameter family of deformations of an ordinary circle: at either end of the wrinkled cylinder, the slices (or level-sets) are still circles, but in the middle you see the slices acquires an additional maximum and minimum. Thresholding this object gives a simple yet still visualizable example of the types of objects we're interested in studying.
+Here we focus on truncations of a simple geometric object known as the wrinkled cylinder, shown below. One way to think about the wrinkled cylinder is to take an ordinary cylinder and push in on the side of it. A more theoretical perspective is to view it as a one-parameter family of deformations of an ordinary circle: at either end of the wrinkled cylinder, the slices (or level-sets) are still circles, but in the middle you see the slices acquires an additional maximum and minimum. Thresholding this object gives a simple yet still visualizable example of the types of objects we're interested in studying.
+
+Below there is code to produce the wrinkled cylinder in plotly, figures for static display, and links to interactive html pages where you can explore the level sets and deformation on your own.
 
 ## Contents 
 * The `Wrinkled_cylinder` directory contains:
