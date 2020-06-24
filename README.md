@@ -25,5 +25,10 @@ A thresholded version of the wrinkled cylinder.
  
 ![A thresholded wrinkled cylinder](./figs/thresh.png)
 
-Interactive versions can be found in [Wrinkled_cylinder/Wrinkled_cylinder.html](Wrinkled_cylinder/Wrinkled_cylinder.html) and [Wrinkled_cylinder/Wrinkled_cylinder_thresh.html](Wrinkled_cylinder/Wrinkled_cylinder_thresh.html).
+### Interactive versions
+
+I think the best intuition is obtained by messing with these in real time. Here are interactive versions of the above two static pictures. You can also find them in the above directory.
+
+ * [Wrinkled_cylinder/Wrinkled_cylinder.html](https://rawcdn.githack.com/catanzaromj/MPFigs/293e30202cfbd950163c9af91008de8e970b6bd4/Wrinkled_cylinder/Wrinkled_cylinder.html)
+ * [Wrinkled_cylinder/Wrinkled_cylinder_thresh.html](https://rawcdn.githack.com/catanzaromj/MPFigs/293e30202cfbd950163c9af91008de8e970b6bd4/Wrinkled_cylinder/Wrinkled_cylinder_thresh.html).
 
